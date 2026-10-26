@@ -1,12 +1,49 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 	<head>
 		<meta charset="UTF-8" />
-		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Vite + React + TS</title>
+		<meta
+			name="description"
+			content="Joseph Wu is a senior software engineer in Toronto building Python platforms, retrieval systems, and AI-enabled applications."
+		/>
+		<meta name="theme-color" content="#080B12" />
+		<title>Joseph Wu | Senior Software Engineer</title>
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Person",
+				"name": "Joseph Wu",
+				"jobTitle": "Senior Software Engineer",
+				"email": "josephwu90@hotmail.com",
+				"telephone": "+1-828-715-3599",
+				"address": {
+					"@type": "PostalAddress",
+					"addressLocality": "Toronto",
+					"addressRegion": "Ontario",
+					"addressCountry": "Canada"
+				},
+				"knowsLanguage": ["English", "Mandarin"]
+			}
+		</script>
+		<script>
+			try {
+				var stored = localStorage.getItem("theme");
+				var theme =
+					stored === "light" || stored === "dark"
+						? stored
+						: window.matchMedia("(prefers-color-scheme: light)").matches
+							? "light"
+							: "dark";
+				document.documentElement.dataset.theme = theme;
+				document.querySelector('meta[name="theme-color"]').setAttribute(
+					"content",
+					theme === "light" ? "#F4F6FB" : "#080B12",
+				);
+			} catch (e) {}
+		</script>
 	</head>
-
 	<body>
 		<div id="root"></div>
 		<script type="module" src="/src/react-app/main.tsx"></script>
