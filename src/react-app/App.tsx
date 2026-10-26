@@ -11,21 +11,21 @@ import { Philosophy } from "./sections/Philosophy";
 import { Projects } from "./sections/Projects";
 
 export default function App() {
-	return (
-		<>
-			<Navbar />
-			<main>
-				<Hero />
-				<About />
-				<Expertise />
-				<Experience />
-				<Projects />
-				<Philosophy />
-				<Education />
-				<Contact />
-			</main>
-			<Footer />
-			<BackToTop />
-		</>
-	);
+  return (
+    <>
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Expertise />
+        <Experience />
+        <Projects />
+        <Philosophy />
+        <Education />
+        <Contact />
+      </main>
+      <Footer />
+      <BackToTop />
+    </>
+  );
 }

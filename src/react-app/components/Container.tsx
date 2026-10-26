@@ -1,11 +1,13 @@
 import type { ReactNode } from "react";
 
 export function Container({
-	children,
-	className = "",
+  children,
+  className = "",
 }: {
-	children: ReactNode;
-	className?: string;
+  children: ReactNode;
+  className?: string;
 }) {
-	return <div className={`mx-auto w-full max-w-[1200px] px-5 sm:px-8 ${className}`}>{children}</div>;
+  return (
+    <div className={`mx-auto w-full max-w-[1200px] px-5 sm:px-8 ${className}`}>{children}</div>
+  );
 }

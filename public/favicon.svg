@@ -1,6 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="8" fill="#080B12"/>
-  <rect x="1.2" y="1.2" width="29.6" height="29.6" rx="6.8" stroke="#6D8EFF" stroke-width="1.25"/>
-  <path fill="#F5F7FA" d="M6.6 8.4h6.6v1.7H11v7.6c0 1.55-.95 2.5-2.45 2.5-1.05 0-1.8-.4-2.15-1.15l1.45-.75c.15.3.45.55.9.55.65 0 1-.4 1-1.15V10.1H6.6V8.4Z"/>
-  <path fill="#F5F7FA" d="M15.15 8.4h2.05l1.85 8.35L20.9 8.4h2.05l1.85 8.35 1.85-8.35H28.7L26.55 20.6h-1.9l-1.85-7.55-1.85 7.55h-1.9L15.15 8.4Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="JW">
+  <rect width="64" height="64" rx="14" fill="#0E1524"/>
+  <svg x="5" y="16" width="54" height="32" viewBox="0 0 450 210">
+    <defs>
+      <linearGradient id="jw" x1="12" y1="6" x2="430" y2="196" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#1454e4"/>
+        <stop offset="0.38" stop-color="#2a74ff"/>
+        <stop offset="0.68" stop-color="#2ec6f0"/>
+        <stop offset="1" stop-color="#8ef6ff"/>
+      </linearGradient>
+    </defs>
+    <path fill="url(#jw)" d="M196 6 L140 38 L136 96 C128 122 100 136 64 132 L28 126 L22 122 L22 164 C78 198 150 206 196 158 L196 6 Z"/>
+    <path fill="url(#jw)" d="M202.9 80.7 L224.9 156.7 L265.2 166.7 L325.2 104.7 L288.3 101.7 L334.3 167.7 L371.0 171.0 L433.0 109.0 L399.0 75.0 L337.0 137.0 L373.7 140.3 L327.7 74.3 L290.8 71.3 L230.8 133.3 L271.1 143.3 L249.1 67.3 Z"/>
+  </svg>
 </svg>
