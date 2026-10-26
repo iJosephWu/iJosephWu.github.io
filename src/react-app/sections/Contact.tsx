@@ -8,6 +8,7 @@ export function Contact() {
   const [copied, setCopied] = useState(false);
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
 
   const copyEmail = async () => {
     await navigator.clipboard.writeText(profile.email);
@@ -15,22 +16,51 @@ export function Contact() {
     window.setTimeout(() => setCopied(false), 1600);
   };
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const name = String(form.get("name") ?? "").trim();
-    const email = String(form.get("email") ?? "").trim();
-    const message = String(form.get("message") ?? "").trim();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const name = String(data.get("name") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const message = String(data.get("message") ?? "").trim();
+    const company = String(data.get("company") ?? "").trim();
+
     if (!name || !email || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setError("Add your name, a valid email, and a message.");
       setStatus("");
       return;
     }
+
+    setSending(true);
     setError("");
-    const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
-    const body = encodeURIComponent(`${message}\n\n${name}\n${email}`);
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
-    setStatus("Your email app is opening with this message addressed to Joseph.");
+    setStatus("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message, company }),
+      });
+      const result = (await response.json().catch(() => null)) as {
+        error?: string;
+        ok?: boolean;
+      } | null;
+
+      if (!response.ok || !result?.ok) {
+        setError(
+          result?.error ||
+            "The message could not be sent. Email josephwu90@gmail.com or try again.",
+        );
+        return;
+      }
+
+      form.reset();
+      setStatus("Thanks. Your message was sent to Joseph.");
+    } catch {
+      setError("The message could not be sent. Email josephwu90@gmail.com or try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -83,21 +113,39 @@ export function Contact() {
 
         <Reveal delay={0.06}>
           <form onSubmit={onSubmit} className="panel space-y-4 p-5 sm:p-6" noValidate>
+            <input
+              id="contact-company"
+              name="company"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="sr-only"
+            />
             <label className="block text-sm text-muted">
               Name
-              <input className="field mt-2" name="name" autoComplete="name" />
+              <input className="field mt-2" name="name" autoComplete="name" disabled={sending} />
             </label>
             <label className="block text-sm text-muted">
               Email
-              <input className="field mt-2" name="email" type="email" autoComplete="email" />
+              <input
+                className="field mt-2"
+                name="email"
+                type="email"
+                autoComplete="email"
+                disabled={sending}
+              />
             </label>
             <label className="block text-sm text-muted">
               Message
-              <textarea className="field mt-2 min-h-32 resize-y" name="message" />
+              <textarea
+                className="field mt-2 min-h-32 resize-y"
+                name="message"
+                disabled={sending}
+              />
             </label>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" disabled={sending}>
               <Send size={16} strokeWidth={2.25} />
-              Send email
+              {sending ? "Sending..." : "Send email"}
             </button>
             {error ? <p className="text-sm text-accent">{error}</p> : null}
             {status ? <p className="text-sm text-muted">{status}</p> : null}

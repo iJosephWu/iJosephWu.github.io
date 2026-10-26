@@ -206,6 +206,11 @@ body::before {
       filter 0.16s ease;
   }
 
+  .btn:disabled {
+    cursor: wait;
+    opacity: 0.64;
+  }
+
   .btn-primary {
     background: #f7f8fb;
     color: #121826;
