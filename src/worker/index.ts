@@ -8,6 +8,7 @@ type ContactBody = {
   name?: unknown;
   email?: unknown;
   message?: unknown;
+  contact_hp?: unknown;
   company?: unknown;
 };
 
@@ -22,7 +23,11 @@ app.post("/api/contact", async (c) => {
     return c.json({ ok: false, error: "Send your name, email, and message." }, 400);
   }
 
-  if (typeof body.company === "string" && body.company.trim()) {
+  const honeypot =
+    (typeof body.contact_hp === "string" && body.contact_hp.trim()) ||
+    (typeof body.company === "string" && body.company.trim());
+
+  if (honeypot) {
     return c.json({ ok: true });
   }
 
@@ -43,42 +48,56 @@ app.post("/api/contact", async (c) => {
   }
 
   const origin = c.req.header("Origin") || c.req.header("Referer") || "";
-  const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_TO}`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      ...(origin ? { Origin: origin, Referer: origin } : {}),
-    },
-    body: JSON.stringify({
-      name,
-      email,
-      message,
-      _captcha: "false",
-      _replyto: email,
-      _subject: `Portfolio inquiry from ${name}`,
-      _template: "table",
-    }),
-  });
 
-  const result = (await response.json().catch(() => null)) as {
-    message?: string;
-    success?: boolean | string;
-  } | null;
+  try {
+    const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_TO}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        ...(origin ? { Origin: origin, Referer: origin } : {}),
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        message,
+        _captcha: "false",
+        _replyto: email,
+        _subject: `Portfolio inquiry from ${name}`,
+        _template: "table",
+      }),
+    });
 
-  const accepted = response.ok && result?.success !== false && result?.success !== "false";
+    const result = (await response.json().catch(() => null)) as {
+      message?: string;
+      success?: boolean | string;
+    } | null;
 
-  if (!accepted) {
+    const accepted = response.ok && (result?.success === true || result?.success === "true");
+
+    if (!accepted) {
+      const detail = result?.message || "";
+      return c.json(
+        {
+          ok: false,
+          error: /activat/i.test(detail)
+            ? `Open the Activate Form email sent to ${CONTACT_TO}, then send again.`
+            : `The message could not be sent. Email ${CONTACT_TO} or try again.`,
+        },
+        502,
+      );
+    }
+
+    return c.json({ ok: true });
+  } catch {
     return c.json(
       {
         ok: false,
-        error: "The message could not be sent. Email josephwu90@gmail.com or try again.",
+        error: `The message could not be sent. Email ${CONTACT_TO} or try again.`,
       },
       502,
     );
   }
-
-  return c.json({ ok: true });
 });
 
 export default app;

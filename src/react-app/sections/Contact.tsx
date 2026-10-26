@@ -4,6 +4,16 @@ import { contactIntro, profile } from "../data/portfolio";
 import { Container } from "../components/Container";
 import { Reveal } from "../components/Reveal";
 
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const sendTimeoutMs = 15000;
+
+function deliveryError(detail = "") {
+  if (/activat/i.test(detail)) {
+    return `Open the Activate Form email sent to ${profile.email}, then send again.`;
+  }
+  return `The message could not be sent. Email ${profile.email} or try again.`;
+}
+
 export function Contact() {
   const [copied, setCopied] = useState(false);
   const [status, setStatus] = useState("");
@@ -23,9 +33,16 @@ export function Contact() {
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
-    const company = String(data.get("company") ?? "").trim();
+    const honeypot = String(data.get("contact_hp") ?? "").trim();
 
-    if (!name || !email || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (honeypot) {
+      form.reset();
+      setError("");
+      setStatus("Thanks. Your message was sent to Joseph.");
+      return;
+    }
+
+    if (!name || !email || !message || !emailPattern.test(email)) {
       setError("Add your name, a valid email, and a message.");
       setStatus("");
       return;
@@ -35,11 +52,15 @@ export function Contact() {
     setError("");
     setStatus("");
 
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), sendTimeoutMs);
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message, company }),
+        body: JSON.stringify({ name, email, message }),
+        signal: controller.signal,
       });
       const result = (await response.json().catch(() => null)) as {
         error?: string;
@@ -47,18 +68,16 @@ export function Contact() {
       } | null;
 
       if (!response.ok || !result?.ok) {
-        setError(
-          result?.error ||
-            "The message could not be sent. Email josephwu90@gmail.com or try again.",
-        );
+        setError(deliveryError(result?.error));
         return;
       }
 
       form.reset();
       setStatus("Thanks. Your message was sent to Joseph.");
     } catch {
-      setError("The message could not be sent. Email josephwu90@gmail.com or try again.");
+      setError(deliveryError());
     } finally {
+      window.clearTimeout(timer);
       setSending(false);
     }
   };
@@ -114,8 +133,8 @@ export function Contact() {
         <Reveal delay={0.06}>
           <form onSubmit={onSubmit} className="panel space-y-4 p-5 sm:p-6" noValidate>
             <input
-              id="contact-company"
-              name="company"
+              id="contact-hp"
+              name="contact_hp"
               tabIndex={-1}
               autoComplete="off"
               aria-hidden="true"
