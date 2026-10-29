@@ -1,6 +1,7 @@
 {
   "name": "josephwu",
   "description": "Joseph Wu portfolio. Senior software engineer and AI engineering.",
+  "homepage": "https://ijosephwu.github.io",
   "cloudflare": {
     "label": "Vite React Template",
     "products": [
@@ -45,6 +46,7 @@
   "private": true,
   "scripts": {
     "build": "tsc -b && vite build",
+    "build:pages": "tsc -b && vite build",
     "cf-typegen": "wrangler types",
     "check": "tsc && vite build && wrangler deploy --dry-run",
     "deploy": "wrangler deploy",

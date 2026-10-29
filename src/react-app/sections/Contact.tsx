@@ -5,13 +5,69 @@ import { Container } from "../components/Container";
 import { Reveal } from "../components/Reveal";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const sendTimeoutMs = 15000;
+const sendTimeoutMs = 20000;
 
 function deliveryError(detail = "") {
   if (/activat/i.test(detail)) {
     return `Open the Activate Form email sent to ${profile.email}, then send again.`;
   }
   return `The message could not be sent. Email ${profile.email} or try again.`;
+}
+
+async function deliverInquiry(
+  name: string,
+  email: string,
+  message: string,
+  signal: AbortSignal,
+) {
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, message }),
+      signal,
+    });
+    const result = (await response.json().catch(() => null)) as {
+      error?: string;
+      ok?: boolean;
+    } | null;
+    if (response.ok && result?.ok) {
+      return { ok: true as const };
+    }
+    if (result?.error && /activat/i.test(result.error)) {
+      return { ok: false as const, error: result.error };
+    }
+  } catch (error) {
+    if (error instanceof DOMException && error.name === "AbortError") {
+      throw error;
+    }
+  }
+
+  const payload = new FormData();
+  payload.set("name", name);
+  payload.set("email", email);
+  payload.set("message", message);
+  payload.set("_captcha", "false");
+  payload.set("_replyto", email);
+  payload.set("_subject", `Portfolio inquiry from ${name}`);
+  payload.set("_template", "table");
+
+  const response = await fetch(`https://formsubmit.co/ajax/${profile.email}`, {
+    method: "POST",
+    headers: { Accept: "application/json" },
+    body: payload,
+    signal,
+  });
+  const result = (await response.json().catch(() => null)) as {
+    success?: boolean | string;
+    message?: string;
+  } | null;
+
+  if (result?.success === true || result?.success === "true") {
+    return { ok: true as const };
+  }
+
+  return { ok: false as const, error: result?.message || "" };
 }
 
 export function Contact() {
@@ -56,19 +112,9 @@ export function Contact() {
     const timer = window.setTimeout(() => controller.abort(), sendTimeoutMs);
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
-        signal: controller.signal,
-      });
-      const result = (await response.json().catch(() => null)) as {
-        error?: string;
-        ok?: boolean;
-      } | null;
-
-      if (!response.ok || !result?.ok) {
-        setError(deliveryError(result?.error));
+      const delivered = await deliverInquiry(name, email, message, controller.signal);
+      if (!delivered.ok) {
+        setError(deliveryError("error" in delivered ? delivered.error : ""));
         return;
       }
 
