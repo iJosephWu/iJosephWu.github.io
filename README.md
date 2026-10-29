@@ -16,4 +16,4 @@ npm run build:pages
 npm run preview
 ```
 
-GitHub Pages builds with `GITHUB_PAGES=true npm run build:pages`. The portrait is `public/images/joseph-portrait.jpg`. The downloadable resume is `public/resume/joseph-wu-resume.pdf`.
+GitHub Pages serves the static build from `docs/`. Rebuild it with `npm run build:pages`, then copy `dist` to `docs`. The portrait is `public/images/joseph-portrait.jpg`. The downloadable resume is `public/resume/joseph-wu-resume.pdf`.
