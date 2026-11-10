@@ -54,8 +54,8 @@ export function Hero() {
               alt="Portrait of Joseph Wu"
               className="portrait-frame aspect-square w-full rounded-[1.7rem] object-cover object-[center_18%]"
             />
-            <figcaption className="mt-3.5 text-left text-[0.68rem] font-medium tracking-[0.28em] text-[#8b97ab]">
-              TORONTO, ONTARIO, CANADA
+            <figcaption className="mt-3.5 text-left text-[0.68rem] font-medium tracking-[0.28em] text-[#8b97ab] uppercase">
+              {profile.location}
             </figcaption>
             <span className="pointer-events-none absolute -right-3.5 -bottom-0.5 h-8 w-8 border-r border-b border-[#38d9e6]" />
           </figure>
