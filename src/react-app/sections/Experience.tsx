@@ -14,7 +14,7 @@ export function Experience() {
         <SectionHeading
           index="03 / Experience"
           title="My professional journey."
-          lead="From Wave Financial to AI leadership at Arbitexia."
+          lead="From Wave HQ to AI product engineering at Arbitexia."
         />
 
         <div className="relative mt-12 space-y-4">

@@ -6,7 +6,7 @@ export const profile = {
   headlineLead: "Hi, I'm",
   headlineName: "Joseph Wu.",
   subhead: "Building intelligent software for the real world.",
-  location: "Toronto, Ontario, Canada",
+  location: "Florida, United States",
   languages: "English and Mandarin",
   email: "josephwu90@gmail.com",
   phone: "+18287153599",
@@ -28,7 +28,7 @@ export const heroIntro =
   "I build backend platforms and AI-enabled applications with Python, from API design and data processing through cloud deployment and production operations. Recent work focuses on retrieval-augmented generation, LLM integrations, agent workflows, and evaluation.";
 
 export const heroFacts = [
-  { label: "Toronto, Ontario, Canada", icon: "pin" },
+  { label: "Florida, United States", icon: "pin" },
   { label: "AI Engineering", icon: "cpu" },
   { label: "Python & Backend Systems", icon: "terminal" },
 ] as const;
@@ -173,39 +173,38 @@ export const skillGroups = [
 
 export const experience = [
   {
-    company: "Arbitexia",
-    role: "Engineering Manager, AI Platforms",
+    company: "Arbitexia Limited",
+    role: "Senior Full Stack Engineer",
     dates: "Jan 2025 to Present",
-    location: "Remote from Toronto, Canada",
+    location: "Florida, United States",
     summary:
-      "Provide hands-on technical leadership for Python-based AI applications, including service design, implementation, reviews, and delivery planning.",
-    tags: ["Python", "FastAPI", "RAG", "LLM workflows", "Evaluation"],
+      "Build AI-powered web features end to end with React, TypeScript, and Node.js, from the user interface to the APIs that connect it to language models.",
+    tags: ["React", "TypeScript", "Node.js", "LLM integration", "Evaluation"],
     contributions: [
-      "Provide hands-on technical leadership for Python-based AI applications, including service design, implementation, reviews, and delivery planning.",
-      "Design FastAPI services and RAG workflows for document ingestion, semantic retrieval, and source-grounded responses.",
-      "Prototype LLM agent workflows with tool integrations, explicit validation, audit trails, and human approval for consequential actions.",
-      "Guide engineers on testing, prompt and retrieval evaluation, deployment practices, and operational troubleshooting.",
-      "Collaborate with stakeholders to define feasible releases and balance product needs with maintainable system architecture.",
+      "Built AI-powered web features end to end using React, TypeScript, and Node.js, from the user interface to the APIs that connected it to language models.",
+      "Integrated LLMs into product workflows and evaluated outputs against real user scenarios to catch inconsistent or incorrect responses.",
+      "Improved the reliability of AI features by tracking response times, API errors, and model usage, and adding fallbacks for failed requests.",
+      "Helped shape technical decisions, reviewed code, and worked with product and design to bring features from prototype to production.",
     ],
   },
   {
     company: "Wealthsimple",
     role: "Senior Software Engineer",
     dates: "Apr 2019 to Dec 2024",
-    location: "Toronto, Ontario, Canada",
+    location: "Delaware, United States",
     summary:
-      "Developed backend services and APIs for financial data workflows, integrations, and internal operational tools.",
-    tags: ["Backend APIs", "PostgreSQL", "React", "TypeScript", "Observability"],
+      "Built backend services and internal tools for financial data processing, integrations, and operations at Wealthsimple US.",
+    tags: ["Backend services", "PostgreSQL", "React", "TypeScript", "Monitoring"],
     contributions: [
-      "Developed backend services and APIs for financial data workflows, integrations, and internal operational tools.",
-      "Designed asynchronous processing patterns with retries, idempotency, and observability to improve service resilience.",
-      "Optimized PostgreSQL queries and caching paths, and strengthened automated tests, release checks, and incident diagnostics.",
-      "Partnered with product, security, and infrastructure teams on system design and production rollouts, and mentored engineers through reviews and pairing.",
-      "Built internal React and TypeScript interfaces that surfaced workflow status and supported operational investigations.",
+      "Built backend services and internal tools for financial data processing, integrations, and operations at Wealthsimple US.",
+      "Designed asynchronous workflows with retries and idempotency so failed jobs could be retried safely, and added monitoring to help diagnose production issues.",
+      "Tuned PostgreSQL queries and caching, expanded automated test coverage, and improved release checks.",
+      "Built React and TypeScript tools that helped operations teams track workflow status and investigate failures.",
+      "Partnered with product, security, and infrastructure teams on system design and production rollouts, and mentored engineers through code reviews and pair programming.",
     ],
   },
   {
-    company: "Wave Financial",
+    company: "Wave HQ",
     role: "Software Engineer",
     dates: "Jul 2015 to Mar 2019",
     location: "Toronto, Ontario, Canada",
@@ -219,7 +218,7 @@ export const experience = [
     ],
   },
   {
-    company: "Wave Financial",
+    company: "Wave HQ",
     role: "Junior Software Engineer",
     dates: "Jul 2012 to Jun 2015",
     location: "Toronto, Ontario, Canada",
@@ -284,13 +283,13 @@ export const principles = [
 
 export const education = {
   school: "University of Waterloo",
-  degree: "Bachelor of Computer Science",
+  degree: "Bachelor's degree, Computer Science",
   place: "Waterloo, Ontario",
   dates: "2008 to 2012",
   achievements: [
     {
       title: "Degree completed",
-      body: "Finished a Bachelor of Computer Science, the academic base for a career in production software.",
+      body: "Finished a bachelor's degree in Computer Science, the academic base for a career in production software.",
     },
     {
       title: "Software foundations",

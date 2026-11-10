@@ -1,0 +1,177 @@
+<!doctype html>
+<!-- Source for public/resume/joseph-wu-resume.pdf. Keep in sync with src/react-app/data/portfolio.ts.
+     Rebuild: chrome --headless=new --no-pdf-header-footer --print-to-pdf=public/resume/joseph-wu-resume.pdf resume/joseph-wu-resume.html -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Joseph Wu | Senior Software Engineer</title>
+    <style>
+      @page {
+        size: Letter;
+        margin: 0.6in 0.65in 0.65in;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Calibri, "Segoe UI", Arial, sans-serif;
+        font-size: 10.5pt;
+        line-height: 1.38;
+        color: #1a1f2b;
+      }
+      h1 {
+        margin: 0;
+        font-size: 24pt;
+        letter-spacing: 0.06em;
+        color: #13203f;
+      }
+      .title {
+        margin: 2pt 0 4pt;
+        font-size: 11pt;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: #3d5fe0;
+      }
+      .contact {
+        font-size: 9.5pt;
+        color: #4a5468;
+        padding-bottom: 8pt;
+        border-bottom: 1.5pt solid #13203f;
+      }
+      h2 {
+        margin: 13pt 0 5pt;
+        font-size: 10.5pt;
+        letter-spacing: 0.1em;
+        color: #13203f;
+        border-bottom: 0.75pt solid #c9d0de;
+        padding-bottom: 2pt;
+      }
+      p {
+        margin: 0 0 5pt;
+      }
+      .skills p {
+        margin-bottom: 3pt;
+      }
+      .job {
+        margin-bottom: 9pt;
+        break-inside: avoid;
+      }
+      .job-head {
+        font-weight: 700;
+        color: #13203f;
+      }
+      .job-head span {
+        font-weight: 400;
+      }
+      .job-meta {
+        font-size: 9.5pt;
+        color: #4a5468;
+        margin-bottom: 2pt;
+      }
+      ul {
+        margin: 0;
+        padding-left: 14pt;
+      }
+      li {
+        margin-bottom: 1.5pt;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>JOSEPH WU</h1>
+    <div class="title">SENIOR SOFTWARE ENGINEER | AI ENGINEERING</div>
+    <div class="contact">
+      Florida, United States | josephwu90@gmail.com | +1 828 715 3599 | English &amp; Mandarin
+    </div>
+
+    <h2>PROFESSIONAL SUMMARY</h2>
+    <p>
+      Senior Software Engineer with 14 years of experience building backend platforms, distributed services, and
+      AI-enabled applications across financial technology and product engineering. Python runs through that work:
+      API design, data processing, cloud deployment, and the production operations that keep a system reliable after
+      it ships.
+    </p>
+    <p>
+      Currently a Senior Full Stack Engineer at Arbitexia Limited, building AI-powered web features end to end with
+      React, TypeScript, and Node.js. Integrates LLMs into product workflows, evaluates outputs against real user
+      scenarios, and adds monitoring and fallbacks so AI features stay reliable. Also designs retrieval-augmented
+      generation (RAG) pipelines, FastAPI services for document ingestion and semantic retrieval, and agent workflows,
+      with evaluation around prompts and search so answers stay grounded in source material.
+    </p>
+    <p>
+      Previously built financial technology services at Wealthsimple and Wave HQ, including asynchronous processing,
+      data integrations, PostgreSQL optimization, and internal tools. Reviews designs, plans releases with
+      stakeholders, and mentors engineers on testing, deployment, and operational troubleshooting.
+    </p>
+
+    <h2>TECHNICAL EXPERTISE</h2>
+    <div class="skills">
+      <p><strong>Backend &amp; Languages:</strong> Python, Java, Node.js, TypeScript, JavaScript, FastAPI, Django, Flask, REST APIs, SQL</p>
+      <p><strong>AI &amp; Data:</strong> LLM APIs, RAG, LangChain, LangGraph, embeddings, pgvector, semantic retrieval, agent workflows, prompt and output evaluation, PostgreSQL, Prisma, Redis</p>
+      <p><strong>Cloud &amp; Delivery:</strong> AWS, Docker, Kubernetes, Terraform, CI/CD, asynchronous processing, monitoring and observability, production operations</p>
+      <p><strong>Frontend:</strong> React, Next.js, HTML, CSS, Tailwind CSS, responsive UI, accessibility</p>
+    </div>
+
+    <h2>PROFESSIONAL EXPERIENCE</h2>
+    <div class="job">
+      <div class="job-head">ARBITEXIA LIMITED <span>| Senior Full Stack Engineer</span></div>
+      <div class="job-meta">Jan 2025 - Present | Florida, United States</div>
+      <ul>
+        <li>Built AI-powered web features end to end using React, TypeScript, and Node.js, from the user interface to the APIs that connected it to language models.</li>
+        <li>Integrated LLMs into product workflows and evaluated outputs against real user scenarios to catch inconsistent or incorrect responses.</li>
+        <li>Improved the reliability of AI features by tracking response times, API errors, and model usage, and adding fallbacks for failed requests.</li>
+        <li>Helped shape technical decisions, reviewed code, and worked with product and design to bring features from prototype to production.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">WEALTHSIMPLE <span>| Senior Software Engineer</span></div>
+      <div class="job-meta">Apr 2019 - Dec 2024 | Delaware, United States</div>
+      <ul>
+        <li>Built backend services and internal tools for financial data processing, integrations, and operations at Wealthsimple US.</li>
+        <li>Designed asynchronous workflows with retries and idempotency so failed jobs could be retried safely, and added monitoring to help diagnose production issues.</li>
+        <li>Tuned PostgreSQL queries and caching, expanded automated test coverage, and improved release checks.</li>
+        <li>Built React and TypeScript tools that helped operations teams track workflow status and investigate failures.</li>
+        <li>Partnered with product, security, and infrastructure teams on system design and production rollouts; mentored engineers through code reviews and pair programming.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">WAVE HQ <span>| Software Engineer</span></div>
+      <div class="job-meta">Jul 2015 - Mar 2019 | Toronto, Ontario, Canada</div>
+      <ul>
+        <li>Built and maintained Python and Django services and REST APIs for small-business financial application workflows.</li>
+        <li>Implemented background jobs, external API integrations, and data synchronization with clear failure handling.</li>
+        <li>Improved SQL access patterns, automated test coverage, and logging while collaborating with product and frontend teams.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">WAVE HQ <span>| Junior Software Engineer</span></div>
+      <div class="job-meta">Jul 2012 - Jun 2015 | Toronto, Ontario, Canada</div>
+      <ul>
+        <li>Delivered application features using Python, Django, JavaScript, and relational databases under senior engineering guidance.</li>
+        <li>Investigated defects, implemented validation and tests, and supported routine deployments and third-party integrations.</li>
+      </ul>
+    </div>
+
+    <h2>SELECTED ENGINEERING WORK</h2>
+    <p>
+      <strong>AI Knowledge Assistant: Retrieval-Augmented Generation.</strong> Designed a RAG architecture covering
+      document ingestion, chunking, vector search, retrieval APIs, and source-grounded answers. Connected retrieval
+      results to generated responses to keep outputs tied to supporting documents.
+    </p>
+    <p>
+      <strong>Workflow Automation: LLM Tool Calling.</strong> Prototyped a tool-calling workflow with deterministic
+      validation checks and explicit approval steps before consequential actions, emphasizing predictable behavior
+      and human oversight.
+    </p>
+
+    <h2>EDUCATION</h2>
+    <div class="job">
+      <div class="job-head">UNIVERSITY OF WATERLOO <span>| Bachelor's degree, Computer Science</span></div>
+      <div class="job-meta">2008 - 2012 | Waterloo, Ontario, Canada</div>
+    </div>
+  </body>
+</html>
